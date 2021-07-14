@@ -1,0 +1,3 @@
+# ONS Death data as test example
+died_from_any_cause
+with_these_codes_on_death_certificate
