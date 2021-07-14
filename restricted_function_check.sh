@@ -29,4 +29,9 @@ if "$matches_found" = true; then
             echo -e "\t ${match}"
         done
     done
+
+    echo "If you believe this to be in error, please contact the OpenSAFELY Team"
+    return 1
 fi
+
+return 0
