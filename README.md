@@ -1,4 +1,4 @@
-# OpenSAFELY Research Action
+# OpenSAFELY Dataset Usage Checker Action
 
 This repo provides a GitHub Action for verifying that
 [OpenSAFELY](https://docs.opensafely.org/) research repos 
