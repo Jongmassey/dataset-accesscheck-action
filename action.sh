@@ -25,22 +25,28 @@ curl \
   | \
   tar --strip-components=1 -xzf -
 
-python3 -m pip install --quiet --quiet --upgrade opensafely
-echo "Installing $(opensafely --version)"
+echo "$long_line"
+echo "${bold}→ Preparing${reset}"
+echo
+echo "Checking out research dataset checker"
+echo "https://api.github.com/repos/Jongmassey/research_repository_permissions/tarball/"
 echo
 
-echo
-echo "$long_line"
-echo "${bold}→ Checking codelists${reset}"
-echo "  opensafely codelists check"
-echo
-opensafely codelists check
-echo
+if [[ -z "$GITHUB_TOKEN" ]]; then
+  auth_header=''
+else
+  auth_header="authorization: Bearer $GITHUB_TOKEN"
+fi
+mkdir -p $GITHUB_ACTION_PATH/checker &&
+curl \
+  --silent \
+  --header "$auth_header" \
+  -L https://api.github.com/repos/Jongmassey/research_repository_permissions/tarball/ \
+  | \
+  tar -C $GITHUB_ACTION_PATH/checker --strip-components=1 -xzf -
 
-echo
 echo "$long_line"
-echo "${bold}→ Running all project actions${reset}"
-echo "  opensafely run run_all --continue-on-error"
+echo "${bold}→ Preparing${reset}"
 echo
-opensafely run run_all --continue-on-error \
-  --timestamps --format-output-for-github
+echo "Running research dataset checker"
+$GITHUB_ACTION_PATH/checker/check.sh $GITHUB_ACTION_PATH
