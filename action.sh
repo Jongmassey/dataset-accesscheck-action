@@ -18,12 +18,13 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 else
   auth_header="authorization: Bearer $GITHUB_TOKEN"
 fi
+mkdir -p $GITHUB_ACTION_PATH/$GITHUB_REPOSITORY &&
 curl \
   --silent \
   --header "$auth_header" \
   -L https://api.github.com/repos/$GITHUB_REPOSITORY/tarball/$GITHUB_SHA \
   | \
-  tar --strip-components=1 -xzf -
+  tar -C $GITHUB_ACTION_PATH/$GITHUB_REPOSITORY --strip-components=1 -xzf -
 
 echo "$long_line"
 echo "${bold}→ Preparing${reset}"
