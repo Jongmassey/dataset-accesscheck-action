@@ -50,4 +50,4 @@ echo "$long_line"
 echo "${bold}→ Preparing${reset}"
 echo
 echo "Running research dataset checker"
-$GITHUB_ACTION_PATH/checker/check.sh $GITHUB_ACTION_PATH
+$GITHUB_ACTION_PATH/checker/check.sh $GITHUB_ACTION_PATH/$GITHUB_REPOSITORY
